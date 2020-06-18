@@ -1,4 +1,5 @@
-﻿using QuizBot.UIControllers.BaseClasses;
+﻿using QuizBot.Data;
+using QuizBot.UIControllers.BaseClasses;
 using TMPro;
 using UnityEngine;
 

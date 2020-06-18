@@ -2,20 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Answer
+namespace QuizBot.Data
 {
-    public string AnswerText;
-}
+    [System.Serializable]
+    public class Answer
+    {
+        public string AnswerText;
+    }
 
-public class Question
-{
-    public string QuestionText;
-}
+    [System.Serializable]
+    public class Question
+    {
+        public string QuestionText;
+    }
 
-public class QuestionAndAnswer
-{
-    public Question Question;
-    public List<Answer> Answers;
-    public int ScoreValue;
-    public float TimerDuration;
+    [System.Serializable]
+    public class QuestionAndAnswer
+    {
+        public Question Question;
+        public List<Answer> Answers;
+        public int ScoreValue;
+        public float TimerDuration;
+    }
 }

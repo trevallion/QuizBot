@@ -1,4 +1,5 @@
-﻿using QuizBot.UIControllers.BaseClasses;
+﻿using QuizBot.Data;
+using QuizBot.UIControllers.BaseClasses;
 using QuizBot.UnityEvents;
 using System.Collections;
 using System.Collections.Generic;
