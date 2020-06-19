@@ -1,5 +1,6 @@
 ﻿using QuizBot.Data;
 using QuizBot.UIControllers;
+using QuizBot.UIControllers.Reusable;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,24 +10,40 @@ namespace QuizBot.GameLogic
     public class Quizzer : MonoBehaviour
     {
         [SerializeField]
-        private QuestionController _questionController = null;
+        private TextController _questionController = null;
 
         [SerializeField]
-        private ScoreController _scoreController = null;
+        private ScoreBoard _scoreBoard = null;
 
         [SerializeField]
-        private List<AnswerController> _answerControllers = new List<AnswerController>();
+        private SelectableTextListController _answerController = null;
 
-        private QuestionAndAnswer QuestionAndAnswer { get; set; }
+        private QuestionAndAnswer CurrentQuestionAndAnswer { get; set; }
+
+        private int SelectedAnswerIndex { get; set; }
 
         private void Awake()
         {
-            for(int i = 0; i < _answerControllers.Count; ++i)
-            {
-                _answerControllers[i].Initialize(i);
-            }
-
-            _scoreController.Refresh(0);
+            ResetScore();
         }
+
+        public void InitializeQuestion(QuestionAndAnswer questionAndAnswer)
+        {
+            CurrentQuestionAndAnswer = questionAndAnswer;
+
+            _questionController.Refresh(questionAndAnswer.Question);
+            _answerController.Refresh(questionAndAnswer.Answers);
+        }
+
+        public void SelectAnswer(int index)
+        {
+            SelectedAnswerIndex = index;
+        }
+
+        private void ResetScore()
+        {
+            _scoreBoard.Set(0);
+        }
+
     }
 }

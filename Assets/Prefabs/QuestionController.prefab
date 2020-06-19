@@ -166,7 +166,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7483078118446996663}
-  - component: {fileID: 6898564290130195891}
+  - component: {fileID: 8160462200577278068}
   m_Layer: 5
   m_Name: QuestionController
   m_TagString: Untagged
@@ -194,7 +194,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -170}
   m_SizeDelta: {x: -400, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6898564290130195891
+--- !u!114 &8160462200577278068
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -203,7 +203,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 6374878290550191875}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f18aac2c99c2c94baa30af8576b341b, type: 3}
+  m_Script: {fileID: 11500000, guid: d944b8d23f14b0b4ea4830c4239dedb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _questionText: {fileID: 8805808617152810658}
+  _containers:
+  - {fileID: 8805808617152810658}

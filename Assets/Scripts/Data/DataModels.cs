@@ -19,8 +19,8 @@ namespace QuizBot.Data
     [System.Serializable]
     public class QuestionAndAnswer
     {
-        public Question Question;
-        public List<Answer> Answers;
+        public string Question;
+        public List<string> Answers;
         public int ScoreValue;
         public float TimerDuration;
     }
