@@ -1,10 +1,5 @@
-﻿using QuizBot.UIControllers.BaseClasses;
-using QuizBot.UIControllers.Reusable;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+﻿using QuizBot.UIControllers.Reusable;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace QuizBot.GameLogic
 {

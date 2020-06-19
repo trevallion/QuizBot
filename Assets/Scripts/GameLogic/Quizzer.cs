@@ -1,8 +1,5 @@
 ﻿using QuizBot.Data;
-using QuizBot.UIControllers;
 using QuizBot.UIControllers.Reusable;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace QuizBot.GameLogic

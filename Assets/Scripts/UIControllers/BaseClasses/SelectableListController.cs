@@ -38,7 +38,7 @@ namespace QuizBot.UIControllers.BaseClasses
 
         public void ResetSelection()
         {
-            foreach(var listItem in _selectableListItems)
+            foreach (var listItem in _selectableListItems)
             {
                 listItem.SetToggle(false);
             }
