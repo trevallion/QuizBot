@@ -19,6 +19,9 @@ namespace QuizBot.UIControllers.BaseClasses
         [SerializeField]
         protected ContainerController<V, U> _containerController = null;
 
+        // TODO: Add container controller functionality to this class and implement via SelectableListItems.
+        protected abstract ContainerController<V, U> ContainerController { get; }
+
         [SerializeField]
         private List<SelectableListItem> _selectableListItems = new List<SelectableListItem>();
 

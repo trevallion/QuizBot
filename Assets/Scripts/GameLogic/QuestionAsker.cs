@@ -12,9 +12,6 @@ namespace QuizBot.GameLogic
         private TextController _questionController = null;
 
         [SerializeField]
-        private ScoreBoard _scoreBoard = null;
-
-        [SerializeField]
         private SelectableTextListController _answerController = null;
 
         private QuestionAndAnswer CurrentQuestionAndAnswer { get; set; }
@@ -23,11 +20,6 @@ namespace QuizBot.GameLogic
 
         public bool IsSelectedAnswerCorrect => CurrentQuestionAndAnswer != null && 
             SelectedAnswerIndex == CurrentQuestionAndAnswer.CorrectAnswerIndex;
-
-        private void Awake()
-        {
-            ResetScore();
-        }
 
         public void InitializeQuestion(QuestionAndAnswer questionAndAnswer)
         {
@@ -42,11 +34,5 @@ namespace QuizBot.GameLogic
         {
             SelectedAnswerIndex = index;
         }
-
-        private void ResetScore()
-        {
-            _scoreBoard.Set(0);
-        }
-
     }
 }

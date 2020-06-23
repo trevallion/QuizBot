@@ -1,23 +1,27 @@
 ﻿using QuizBot.UIControllers.Reusable;
+using System.Collections;
 using UnityEngine;
 
 namespace QuizBot.GameLogic
 {
     public class Timer : MonoBehaviour
     {
+        private const string TimerStringFormat = "F2";
+
         [SerializeField]
         private TextController _timerTextController = null;
 
-        // Start is called before the first frame update
-        void Start()
+        public IEnumerator RunTimer(float duration)
         {
+            var startTime = Time.time;
 
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
+            while (Time.time < startTime + duration)
+            {
+                var timeRemaining = duration - (Time.time - startTime);
+                _timerTextController.Refresh(timeRemaining.ToString(TimerStringFormat));
+                yield return null;
+            }
+            _timerTextController.Refresh(0.ToString(TimerStringFormat));
         }
     }
 }
