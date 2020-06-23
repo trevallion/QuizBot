@@ -4,8 +4,10 @@ using UnityEngine;
 
 namespace QuizBot.GameLogic
 {
-    public class Quizzer : MonoBehaviour
+    public class QuestionAsker : MonoBehaviour
     {
+        private const int DefaultAnswerIndex = -1;
+
         [SerializeField]
         private TextController _questionController = null;
 
@@ -19,6 +21,9 @@ namespace QuizBot.GameLogic
 
         private int SelectedAnswerIndex { get; set; }
 
+        public bool IsSelectedAnswerCorrect => CurrentQuestionAndAnswer != null && 
+            SelectedAnswerIndex == CurrentQuestionAndAnswer.CorrectAnswerIndex;
+
         private void Awake()
         {
             ResetScore();
@@ -27,6 +32,7 @@ namespace QuizBot.GameLogic
         public void InitializeQuestion(QuestionAndAnswer questionAndAnswer)
         {
             CurrentQuestionAndAnswer = questionAndAnswer;
+            SelectedAnswerIndex = DefaultAnswerIndex;
 
             _questionController.Refresh(questionAndAnswer.Question);
             _answerController.Refresh(questionAndAnswer.Answers);

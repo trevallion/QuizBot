@@ -21,6 +21,7 @@ namespace QuizBot.Data
     {
         public string Question;
         public List<string> Answers;
+        public int CorrectAnswerIndex;
         public int ScoreValue;
         public float TimerDuration;
     }

@@ -452,7 +452,7 @@ GameObject:
   - component: {fileID: 1890179662}
   - component: {fileID: 1890179663}
   m_Layer: 0
-  m_Name: Quizzer
+  m_Name: QuestionAsker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
