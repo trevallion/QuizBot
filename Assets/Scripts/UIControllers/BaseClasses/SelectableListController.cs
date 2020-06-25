@@ -25,6 +25,9 @@ namespace QuizBot.UIControllers.BaseClasses
         [SerializeField]
         private List<SelectableListItem> _selectableListItems = new List<SelectableListItem>();
 
+        [SerializeField]
+        private bool _shouldLockTogglesOnSelectionChange = true;
+
         private void Awake()
         {
             for (int i = 0; i < _selectableListItems.Count; ++i)
@@ -37,6 +40,10 @@ namespace QuizBot.UIControllers.BaseClasses
         public void SelectItem(int index)
         {
             OnListItemSelected?.Invoke(index);
+            if (_shouldLockTogglesOnSelectionChange)
+            {
+                SetListInteractable(false);
+            }
         }
 
         public void ResetSelection()
@@ -45,13 +52,18 @@ namespace QuizBot.UIControllers.BaseClasses
             {
                 listItem.SetToggleValue(false);
             }
+
+            if (_shouldLockTogglesOnSelectionChange)
+            {
+                SetListInteractable(true);
+            }
         }
 
         public void SetListInteractable(bool isInteractable)
         {
             foreach (var listItem in _selectableListItems)
             {
-                listItem.SetToggleInteractable(false);
+                listItem.SetToggleInteractable(isInteractable);
             }
         }
     }

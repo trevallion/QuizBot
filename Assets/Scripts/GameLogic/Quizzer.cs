@@ -8,6 +8,8 @@ namespace QuizBot.GameLogic
 {
     public class Quizzer : MonoBehaviour
     {
+        private const float DelayBetweenQuestions = 1f;
+
 #if UNITY_EDITOR
         [SerializeField]
         private LocalQuizQuestions _localQuizQuestions = null;
@@ -47,6 +49,7 @@ namespace QuizBot.GameLogic
             {
                 yield return StartCoroutine(AskQuestion(questionAndAnswer));
                 UpdateScoreForSelectedAnswer(questionAndAnswer.ScoreValue);
+                yield return new WaitForSeconds(DelayBetweenQuestions);
             }
 
             // TODO: Display summary on completion.
