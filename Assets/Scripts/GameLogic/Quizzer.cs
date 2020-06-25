@@ -1,4 +1,5 @@
 ﻿using QuizBot.Data;
+using QuizBot.GameLogic.QuizProviders;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,13 +8,13 @@ namespace QuizBot.GameLogic
 {
     public class Quizzer : MonoBehaviour
     {
-        private const float DefaultQuestionDuration = 10f;
+#if UNITY_EDITOR
+        [SerializeField]
+        private LocalQuizQuestions _localQuizQuestions = null;
+#endif
 
         [SerializeField]
         private ScoreBoard _scoreBoard = null;
-
-        [SerializeField]
-        private Timer _timer = null;
 
         [SerializeField]
         private QuestionAsker _questionAsker = null;
@@ -22,32 +23,20 @@ namespace QuizBot.GameLogic
 
         private void Awake()
         {
-            ResetScore();
-            var newQuestion = new QuestionAndAnswer()
-            {
-                Question = "What kind of bear is best?",
-                Answers = new List<string>
-                {
-                    "Bears",
-                    "Beets",
-                    "Battlestar Galactica",
-                    "Grizzly"
-                },
-                CorrectAnswerIndex = 3,
-                ScoreValue = 10
-            };
-            var quizQuestions = new List<QuestionAndAnswer> { newQuestion };
-            StartQuiz(quizQuestions);
+            // TODO: Cache this and wrap it in a preprocessor directive once we have multiple implementations.
+            IQuizProvider quizProvider = new LocalQuizProvider(_localQuizQuestions);
+            StartQuiz(quizProvider.GetQuizQuestions());
         }
 
         public void StartQuiz(List<QuestionAndAnswer> quizQuestions)
         {
-            if(quizQuestions == null || quizQuestions.Count == 0)
+            if (quizQuestions == null || quizQuestions.Count == 0)
             {
                 Debug.LogError("Error: no quiz questions provided!");
                 return;
             }
 
+            ResetScore();
             QuizQuestions = quizQuestions;
             StartCoroutine(RunQuiz());
         }
@@ -57,21 +46,27 @@ namespace QuizBot.GameLogic
             foreach(var questionAndAnswer in QuizQuestions)
             {
                 yield return StartCoroutine(AskQuestion(questionAndAnswer));
-                if (_questionAsker.IsSelectedAnswerCorrect)
-                {
-                    _scoreBoard.AddToScore(questionAndAnswer.ScoreValue);
-                }
-                else
-                {
-                    _scoreBoard.AddToScore(-questionAndAnswer.ScoreValue);
-                }
+                UpdateScoreForSelectedAnswer(questionAndAnswer.ScoreValue);
+            }
+
+            // TODO: Display summary on completion.
+        }
+
+        private void UpdateScoreForSelectedAnswer(int scoreValue)
+        {
+            if (_questionAsker.IsSelectedAnswerCorrect)
+            {
+                _scoreBoard.AddToScore(scoreValue);
+            }
+            else
+            {
+                _scoreBoard.AddToScore(-scoreValue);
             }
         }
 
         private IEnumerator AskQuestion(QuestionAndAnswer questionAndAnswer)
         {
-            _questionAsker.InitializeQuestion(questionAndAnswer);
-            yield return StartCoroutine(_timer.RunTimer(DefaultQuestionDuration));
+            yield return StartCoroutine(_questionAsker.AskQuestion(questionAndAnswer));
         }
 
         private void ResetScore()

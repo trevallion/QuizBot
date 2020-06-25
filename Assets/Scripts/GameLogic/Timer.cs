@@ -8,6 +8,8 @@ namespace QuizBot.GameLogic
     {
         private const string TimerStringFormat = "F2";
 
+        public float TimeRemaining { get; set; }
+
         [SerializeField]
         private TextController _timerTextController = null;
 
@@ -17,11 +19,18 @@ namespace QuizBot.GameLogic
 
             while (Time.time < startTime + duration)
             {
-                var timeRemaining = duration - (Time.time - startTime);
-                _timerTextController.Refresh(timeRemaining.ToString(TimerStringFormat));
+                TimeRemaining = duration - (Time.time - startTime);
+                UpdateTimerText();
                 yield return null;
             }
-            _timerTextController.Refresh(0.ToString(TimerStringFormat));
+
+            TimeRemaining = 0;
+            UpdateTimerText();
+        }
+
+        private void UpdateTimerText()
+        {
+            _timerTextController.Refresh(TimeRemaining.ToString(TimerStringFormat));
         }
     }
 }

@@ -20,9 +20,14 @@ public class SelectableListItem : MonoBehaviour
 
     private int ListIndex { get; set; }
 
-    public void SetToggle(bool newValue)
+    public void SetToggleValue(bool newValue)
     {
         _listItemToggle.SetIsOnWithoutNotify(newValue);
+    }
+
+    public void SetToggleInteractable(bool isInteractable)
+    {
+        _listItemToggle.interactable = isInteractable;
     }
 
     public void OnToggleClicked(bool isOn)

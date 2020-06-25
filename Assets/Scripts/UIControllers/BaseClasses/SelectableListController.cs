@@ -43,7 +43,15 @@ namespace QuizBot.UIControllers.BaseClasses
         {
             foreach (var listItem in _selectableListItems)
             {
-                listItem.SetToggle(false);
+                listItem.SetToggleValue(false);
+            }
+        }
+
+        public void SetListInteractable(bool isInteractable)
+        {
+            foreach (var listItem in _selectableListItems)
+            {
+                listItem.SetToggleInteractable(false);
             }
         }
     }
